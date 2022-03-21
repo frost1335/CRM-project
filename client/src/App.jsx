@@ -4,7 +4,7 @@ import Wrapper from './Wrapper/Wrapper'
 const App = () => {
   return (
     <Wrapper>
-        asd
+
     </Wrapper>
   )
 }
