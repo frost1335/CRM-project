@@ -1,12 +1,22 @@
-import React from 'react'
-import Wrapper from './Wrapper/Wrapper'
+import React from "react";
+import { Routes } from "react-router-dom";
+import Register from "./pages/Auth/Register";
+import Wrapper from "./Wrapper/Wrapper";
+
+const isAuthentication = false;
 
 const App = () => {
   return (
-    <Wrapper>
+    <>
+      {!isAuthentication ? (
+        <Wrapper>
+          <Routes></Routes>
+        </Wrapper>
+      ) : (
+        <Register />
+      )}
+    </>
+  );
+};
 
-    </Wrapper>
-  )
-}
-
-export default App
+export default App;
