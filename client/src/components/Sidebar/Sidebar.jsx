@@ -57,7 +57,7 @@ const Sidebar = (props) => {
         <ul className="menu">
           {links.map((link, index) => (
             <li className="link" key={index}>
-              <a href={link.link}>
+              <a href={"#" + link.link}>
                 <link.icon className="icon" /> <span>{link.title}</span>
               </a>
             </li>
