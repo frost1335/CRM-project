@@ -1,16 +1,21 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { Login, RegisterSecond, Forgot, SendInfo } from "./components";
-import Register from "./pages/Auth/Register";
-import LoginPage from "./pages/Auth/Login";
+import { RegisterPage, LoginPage, PageNotFound } from "./pages";
 import Wrapper from "./Wrapper/Wrapper";
-import PrivateRoute from "./pages/privateRoute/privateRoute";
 
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Wrapper>component</Wrapper>} />
-      <Route path="*" element={<Wrapper>not found</Wrapper>} />
+      <Route
+        path="*"
+        element={
+          <Wrapper>
+            <PageNotFound />
+          </Wrapper>
+        }
+      />
       <Route
         path="login"
         element={
@@ -22,9 +27,9 @@ const App = () => {
       <Route
         path="register"
         element={
-          <Register>
+          <RegisterPage>
             <RegisterSecond />
-          </Register>
+          </RegisterPage>
         }
       />
       <Route
@@ -38,17 +43,17 @@ const App = () => {
       <Route
         path="wait"
         element={
-          <Register>
+          <RegisterPage>
             <SendInfo />
-          </Register>
+          </RegisterPage>
         }
       />
       <Route
         path="*"
         element={
-          <Register>
+          <RegisterPage>
             <Login />
-          </Register>
+          </RegisterPage>
         }
       />
     </Routes>
