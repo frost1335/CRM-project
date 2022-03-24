@@ -11,25 +11,20 @@ const Register = (props) => {
 
   const registerContent = () => {
     switch (pathname.replace("/", "")) {
-      case "signup":
-        return {
-          stage: "1",
-          stagetext: "/3 - Registration",
-        };
       case "register":
         return {
-          stage: "2",
-          stagetext: "/3 - Detail information",
+          stage: "1",
+          stagetext: "/2 - Registration",
         };
       case "formed":
         return {
-          stage: "3",
-          stagetext: "/3 - Wait for answer!",
+          stage: "2",
+          stagetext: "/2 - Wait for answer!",
         };
       default:
         return {
           stage: "1",
-          stagetext: "/3 - Registration",
+          stagetext: "/2 - Registration",
         };
     }
   };

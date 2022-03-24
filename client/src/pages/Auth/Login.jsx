@@ -8,7 +8,7 @@ const Login = (props) => {
   const { pathname } = useLocation();
 
   return (
-    <div className="Auth">
+    <div className="Auth login">
       <div className="auth_nav">
         <div className="nav_logo">
           <img src={logoRegister} alt="logo" />

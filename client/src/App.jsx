@@ -33,14 +33,6 @@ const App = () => {
               }
             />
             <Route
-              path="signup"
-              element={
-                <Register>
-                  <RegisterFirst />
-                </Register>
-              }
-            />
-            <Route
               path="register"
               element={
                 <Register>
@@ -57,7 +49,7 @@ const App = () => {
               }
             />
             <Route
-              path="formed"
+              path="wait"
               element={
                 <Register>
                   <SendInfo />
@@ -68,7 +60,7 @@ const App = () => {
               path="*"
               element={
                 <Register>
-                  <RegisterFirst />
+                  <RegisterSecond />
                 </Register>
               }
             />

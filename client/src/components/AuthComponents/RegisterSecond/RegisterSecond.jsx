@@ -4,7 +4,7 @@ import "../authComponent.scss";
 
 const RegisterSecond = () => {
   const [nameFocus, setNameFocus] = useState("");
-  const [jobFocus, setJobFocus] = useState("");
+  const [emailFocus, setEmailFocus] = useState("");
   const [passwordFocus, setPasswordFocus] = useState("");
   const [repeatFocus, setReapetFocus] = useState("");
 
@@ -13,31 +13,31 @@ const RegisterSecond = () => {
     switch (e.target.dataset.focus) {
       case "full-name":
         setNameFocus("active");
-        setJobFocus("");
+        setEmailFocus("");
         setPasswordFocus("");
         setReapetFocus("");
         break;
-      case "job":
+      case "email":
         setNameFocus("");
-        setJobFocus("active");
+        setEmailFocus("active");
         setPasswordFocus("");
         setReapetFocus("");
         break;
       case "password":
         setNameFocus("");
-        setJobFocus("");
+        setEmailFocus("");
         setPasswordFocus("active");
         setReapetFocus("");
         break;
       case "repeat":
         setNameFocus("");
-        setJobFocus("");
+        setEmailFocus("");
         setPasswordFocus("");
         setReapetFocus("active");
         break;
       default:
         setNameFocus("");
-        setJobFocus("");
+        setEmailFocus("");
         setPasswordFocus("");
         setReapetFocus("");
     }
@@ -48,8 +48,8 @@ const RegisterSecond = () => {
       case "full-name":
         setNameFocus("");
         break;
-      case "job":
-        setJobFocus("");
+      case "email":
+        setEmailFocus("");
         break;
       case "password":
         setPasswordFocus("");
@@ -64,33 +64,33 @@ const RegisterSecond = () => {
 
   return (
     <div className="Auth_component component2">
-      <h3>Detail information</h3>
+      <h3>Registration</h3>
 
       <form action="">
         <div className="input_form">
-          <label htmlFor="fullname">Full name*</label>
+          <label htmlFor="email">Your E-mail*</label>
           <input
-            type="text"
-            data-focus="full-name"
+            type="email"
             autoComplete="off"
-            placeholder="Text"
-            id="fullname"
+            placeholder="E-mail"
+            data-focus="email"
+            id="email"
           />
-          <span className={`input_helper ${nameFocus}`}>
-            Please, enter your full name
+          <span className={`input_helper ${emailFocus}`}>
+            Please, enter your work e-mail
           </span>
         </div>
         <div className="input_form">
-          <label htmlFor="job">Your Job*</label>
+          <label htmlFor="username">Username*</label>
           <input
             type="text"
+            data-focus="username"
             autoComplete="off"
-            placeholder="Job"
-            data-focus="job"
-            id="job"
+            placeholder="Username"
+            id="username"
           />
-          <span className={`input_helper ${jobFocus}`}>
-            Please, enter your current job
+          <span className={`input_helper ${nameFocus}`}>
+            Please, enter your username
           </span>
         </div>
         <div className="input_form">
