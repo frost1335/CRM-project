@@ -66,6 +66,10 @@
         opacity: 1;
       }
 
+      input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+
       input {
         width: 420px;
         background: #ffffff;

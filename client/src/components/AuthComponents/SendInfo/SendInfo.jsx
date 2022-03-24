@@ -13,12 +13,22 @@ const SendInfo = () => {
       <div className="contact">
         <div className="text">Contact with us:</div>
         <div className="icons">
-          <Link to={"/"} className="icon">
+          <a
+            href={"https://instagram.com/change_it_academy/"}
+            target="_blank"
+            rel="noreferrer"
+            className="icon"
+          >
             <BsInstagram />
-          </Link>
-          <Link to={"/"} className="icon">
+          </a>
+          <a
+            href={"https://t.me/changeitacademy"}
+            target="_blank"
+            rel="noreferrer"
+            className="icon"
+          >
             <FaTelegramPlane />
-          </Link>
+          </a>
           <Link to={"/"} className="icon">
             <FaFacebookF />
           </Link>

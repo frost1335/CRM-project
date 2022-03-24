@@ -60,9 +60,9 @@ const Login = () => {
       </form>
 
       <p>
-        Do not have an account?{" "}
-        <Link to={"/login"} className="form_link">
-          Registration
+        Forgot your password?{" "}
+        <Link to={"/reset"} className="form_link">
+          Reset
         </Link>
       </p>
     </div>

@@ -45,7 +45,7 @@ const RegisterFirst = () => {
         <div className="input_form">
           <label htmlFor="number">Phone number*</label>
           <input
-            type="tel"
+            type="number"
             autoComplete="off"
             placeholder="+1  (000) 000-0000"
             id="number"

@@ -1,16 +1,39 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  RegisterFirst,
-  RegisterSecond,
-  Login,
-  Reset,
-  SendInfo,
-} from "../../components";
 import { logoRegister, registerImg } from "../../images";
 import "./Authentication.scss";
+import { useLocation } from "react-router-dom";
 
-const Register = () => {
+const Register = (props) => {
+  const { pathname } = useLocation();
+
+  console.log(pathname.replace("/", ""));
+
+  const registerContent = () => {
+    switch (pathname.replace("/", "")) {
+      case "signup":
+        return {
+          stage: "1",
+          stagetext: "/3 - Registration",
+        };
+      case "register":
+        return {
+          stage: "2",
+          stagetext: "/3 - Detail information",
+        };
+      case "formed":
+        return {
+          stage: "3",
+          stagetext: "/3 - Wait for answer!",
+        };
+      default:
+        return {
+          stage: "1",
+          stagetext: "/3 - Registration",
+        };
+    }
+  };
+
   return (
     <div className="Auth">
       <div className="auth_nav">
@@ -27,7 +50,8 @@ const Register = () => {
         <div className="content_left">
           <h2>Connect your team with WorkFly</h2>
           <h6>
-            <span>1</span>/3 - Registration
+            <span>{registerContent().stage}</span>
+            {registerContent().stagetext}
           </h6>
           <p>
             Already have an accout?{" "}
@@ -40,9 +64,7 @@ const Register = () => {
           </div>
         </div>
         <div className="content_right">
-          <div className="register_component">
-            <SendInfo />
-          </div>
+          <div className="register_component">{props.children}</div>
         </div>
       </div>
     </div>
