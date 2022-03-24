@@ -14,7 +14,7 @@ const Login = (props) => {
           <img src={logoRegister} alt="logo" />
         </div>
         <div className="nav_button">
-          <Link to={"/signup"} className="nav_link">
+          <Link to={"/register"} className="nav_link">
             Sign up
           </Link>
         </div>
@@ -25,7 +25,7 @@ const Login = (props) => {
           {pathname.replace("/", "") === "login" ? (
             <p>
               Have no account?{" "}
-              <Link to={"/signup"} className="left_link">
+              <Link to={"/register"} className="left_link">
                 Registration
               </Link>
             </p>

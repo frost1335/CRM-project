@@ -6,7 +6,7 @@ import Switch from "./Switch/Switch";
 import RegisterFirst from "./AuthComponents/RegisterFirst/RegisterFirst";
 import RegisterSecond from "./AuthComponents/RegisterSecond/RegisterSecond";
 import Login from "./AuthComponents/Login/Login";
-import Reset from "./AuthComponents/Reset/Reset";
+import Forgot from "./AuthComponents/Forgot/Forgot";
 import SendInfo from "./AuthComponents/SendInfo/SendInfo";
 
 export {
@@ -18,6 +18,6 @@ export {
   RegisterFirst,
   RegisterSecond,
   Login,
-  Reset,
+  Forgot,
   SendInfo,
 };

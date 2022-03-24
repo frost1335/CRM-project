@@ -1,15 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../authComponent.scss";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const RegisterSecond = () => {
+  const navigate = useNavigate();
   const [nameFocus, setNameFocus] = useState("");
   const [emailFocus, setEmailFocus] = useState("");
   const [passwordFocus, setPasswordFocus] = useState("");
   const [repeatFocus, setReapetFocus] = useState("");
 
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const [error, setError] = useState();
+
   document.addEventListener("focusin", function (e) {
-    console.log(e.target.dataset.focus);
     switch (e.target.dataset.focus) {
       case "full-name":
         setNameFocus("active");
@@ -43,6 +51,49 @@ const RegisterSecond = () => {
     }
   });
 
+  useEffect(() => {
+    if (localStorage.getItem("authToken")) {
+      navigate("/");
+    }
+  }, [navigate]);
+
+  const registerHandler = async (e) => {
+    e.preventDefault();
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    if (password !== confirm) {
+      setPassword("");
+      setConfirm("");
+      setTimeout(() => {
+        setError("");
+      }, 5000);
+      return setError("Passwords do not match");
+    }
+
+    try {
+      const { data } = await axios.post(
+        "api/auth/register",
+        { username, email, password },
+        config
+      );
+
+      localStorage.setItem("authToken", data.token);
+
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      setError(error.response.data.error);
+      setTimeout(() => {
+        setError("");
+      }, 5000);
+    }
+  };
+
   document.addEventListener("focusout", function (e) {
     switch (e.target.dataset.focus) {
       case "full-name":
@@ -66,7 +117,7 @@ const RegisterSecond = () => {
     <div className="Auth_component component2">
       <h3>Registration</h3>
 
-      <form action="">
+      <form onSubmit={registerHandler}>
         <div className="input_form">
           <label htmlFor="email">Your E-mail*</label>
           <input
@@ -75,6 +126,7 @@ const RegisterSecond = () => {
             placeholder="E-mail"
             data-focus="email"
             id="email"
+            onChange={(e) => setEmail(e.target.value)}
           />
           <span className={`input_helper ${emailFocus}`}>
             Please, enter your work e-mail
@@ -88,6 +140,7 @@ const RegisterSecond = () => {
             autoComplete="off"
             placeholder="Username"
             id="username"
+            onChange={(e) => setUsername(e.target.value)}
           />
           <span className={`input_helper ${nameFocus}`}>
             Please, enter your username
@@ -101,6 +154,7 @@ const RegisterSecond = () => {
             placeholder="Create password"
             data-focus="password"
             id="password"
+            onChange={(e) => setPassword(e.target.value)}
           />
           <span className={`input_helper ${passwordFocus}`}>
             Please, enter your safe password
@@ -114,6 +168,7 @@ const RegisterSecond = () => {
             data-focus="repeat"
             placeholder="Repeat password"
             id="reapeat"
+            onChange={(e) => setConfirm(e.target.value)}
           />
           <span className={`input_helper ${repeatFocus}`}>
             Please, repeat your password

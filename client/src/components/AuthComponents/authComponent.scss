@@ -78,7 +78,7 @@
         width: 420px;
         background: #ffffff;
         border: 2px solid rgba(89, 100, 118, 0.16);
-        font-family: 'Inter';
+        font-family: "Inter";
         box-sizing: border-box;
         border-radius: 12px;
         font-style: normal;
@@ -123,6 +123,10 @@
         border: none;
         padding: 16px;
       }
+    }
+
+    .button_form.forgot {
+      margin-bottom: 30px !important;
     }
   }
 

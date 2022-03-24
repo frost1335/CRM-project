@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Wrapper.scss";
 
 import { Navbar, Sidebar } from "../components";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = (props) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem("authToken")) {
+      navigate("/login");
+    }
+  }, [navigate]);
+
   const [sidebar, setSidebar] = useState(true);
 
   const toggleSidebar = () => setSidebar(!sidebar);

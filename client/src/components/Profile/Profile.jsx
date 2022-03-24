@@ -3,8 +3,10 @@ import "./Profile.scss";
 import { profileLogo } from "../../images";
 import { FiChevronRight } from "react-icons/fi";
 import Switch from "../Switch/Switch";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const navigate = useNavigate();
   const [modal, setModal] = useState(false);
   const [overlay, setOverlay] = useState(false);
 
@@ -14,6 +16,10 @@ const Profile = () => {
   };
   const modalToggle = () => setModal(!modal);
   const overlayToggle = () => setOverlay(!overlay);
+  const logoutHandler = () => {
+    localStorage.removeItem("authToken");
+    navigate("/login");
+  };
 
   return (
     <div className="Profile">
@@ -45,7 +51,7 @@ const Profile = () => {
                 </div>
               </li>
               <li onClick={() => overlayToggle()}>My profile</li>
-              <li>Sign out</li>
+              <li onClick={logoutHandler}>Sign out</li>
             </ul>
           </div>
           {overlay ? (

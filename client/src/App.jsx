@@ -1,73 +1,57 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import {
-  Login,
-  RegisterFirst,
-  RegisterSecond,
-  Reset,
-  SendInfo,
-} from "./components";
+import { Login, RegisterSecond, Forgot, SendInfo } from "./components";
 import Register from "./pages/Auth/Register";
 import LoginPage from "./pages/Auth/Login";
 import Wrapper from "./Wrapper/Wrapper";
-
-const isAuthentication = false;
+import PrivateRoute from "./pages/privateRoute/privateRoute";
 
 const App = () => {
   return (
-    <>
-      <Routes>
-        {isAuthentication ? (
-          <>
-            <Route path="/" element={<Wrapper></Wrapper>} />
-            <Route path="*" element={<Wrapper></Wrapper>} />
-          </>
-        ) : (
-          <>
-            <Route
-              path="login"
-              element={
-                <LoginPage>
-                  <Login />
-                </LoginPage>
-              }
-            />
-            <Route
-              path="register"
-              element={
-                <Register>
-                  <RegisterSecond />
-                </Register>
-              }
-            />
-            <Route
-              path="reset"
-              element={
-                <LoginPage>
-                  <Reset />
-                </LoginPage>
-              }
-            />
-            <Route
-              path="wait"
-              element={
-                <Register>
-                  <SendInfo />
-                </Register>
-              }
-            />
-            <Route
-              path="*"
-              element={
-                <Register>
-                  <RegisterSecond />
-                </Register>
-              }
-            />
-          </>
-        )}
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<Wrapper>component</Wrapper>} />
+      <Route path="*" element={<Wrapper>not found</Wrapper>} />
+      <Route
+        path="login"
+        element={
+          <LoginPage>
+            <Login />
+          </LoginPage>
+        }
+      />
+      <Route
+        path="register"
+        element={
+          <Register>
+            <RegisterSecond />
+          </Register>
+        }
+      />
+      <Route
+        path="reset"
+        element={
+          <LoginPage>
+            <Forgot />
+          </LoginPage>
+        }
+      />
+      <Route
+        path="wait"
+        element={
+          <Register>
+            <SendInfo />
+          </Register>
+        }
+      />
+      <Route
+        path="*"
+        element={
+          <Register>
+            <Login />
+          </Register>
+        }
+      />
+    </Routes>
   );
 };
 
