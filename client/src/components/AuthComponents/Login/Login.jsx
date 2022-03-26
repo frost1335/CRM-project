@@ -107,7 +107,7 @@ const Login = () => {
 
       <p>
         Forgot your password?{" "}
-        <Link to={"/reset"} className="form_link">
+        <Link to={"/forgot"} className="form_link">
           Reset
         </Link>
       </p>

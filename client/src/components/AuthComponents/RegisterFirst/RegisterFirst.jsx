@@ -44,12 +44,7 @@ const RegisterFirst = () => {
         </div>
         <div className="input_form">
           <label htmlFor="number">Phone number*</label>
-          <input
-            type="number"
-            autoComplete="off"
-            placeholder="+1  (000) 000-0000"
-            id="number"
-          />
+          <input type="number" placeholder="+1  (000) 000-0000" id="number" />
           <span className={`input_helper ${numberFocus}`}>
             Please, enter your work telephone number
           </span>

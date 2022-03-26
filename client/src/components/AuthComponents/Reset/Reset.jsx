@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
-const Forgot = () => {
-  const [email, setEmail] = useState("");
-  const [success, setSuccess] = useState("");
-  const [error, setError] = useState("");
-
+const Reset = () => {
   const navigate = useNavigate();
   const [resetFocus, setResetFocus] = useState("");
 
@@ -28,40 +23,12 @@ const Forgot = () => {
     if (e.target.type === "email") setResetFocus("");
   });
 
-  console.log(window.onclose);
-
-  const forgotPasswordHandler = async (e) => {
-    e.preventDefault();
-
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    try {
-      const { data } = await axios.post(
-        "api/auth/forgotpassword",
-        { email },
-        config
-      );
-
-      setSuccess(data);
-    } catch (error) {
-      setError(error.response.data.error);
-      setEmail("");
-      setTimeout(() => {
-        setError("");
-      }, 5000);
-    }
-  };
-
   return (
     <div className="Auth_component reset">
       <h3>Forgot password?</h3>
       <h6>Enter your email address for reset password</h6>
 
-      <form onSubmit={forgotPasswordHandler}>
+      <form action="">
         <div className="input_form">
           <label htmlFor="reset">Your E-mail</label>
           <input
@@ -69,8 +36,6 @@ const Forgot = () => {
             autoComplete="off"
             placeholder="Email adress"
             id="reset"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
           />
           <span className={`input_helper ${resetFocus}`}>
             Please, enter your e-mail adress
@@ -84,4 +49,4 @@ const Forgot = () => {
   );
 };
 
-export default Forgot;
+export default Reset;

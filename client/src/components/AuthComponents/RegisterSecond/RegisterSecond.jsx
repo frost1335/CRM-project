@@ -19,7 +19,7 @@ const RegisterSecond = () => {
 
   document.addEventListener("focusin", function (e) {
     switch (e.target.dataset.focus) {
-      case "full-name":
+      case "username":
         setNameFocus("active");
         setEmailFocus("");
         setPasswordFocus("");
@@ -96,7 +96,7 @@ const RegisterSecond = () => {
 
   document.addEventListener("focusout", function (e) {
     switch (e.target.dataset.focus) {
-      case "full-name":
+      case "username":
         setNameFocus("");
         break;
       case "email":
@@ -122,10 +122,10 @@ const RegisterSecond = () => {
           <label htmlFor="email">Your E-mail*</label>
           <input
             type="email"
-            autoComplete="off"
             placeholder="E-mail"
             data-focus="email"
             id="email"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <span className={`input_helper ${emailFocus}`}>
@@ -137,9 +137,9 @@ const RegisterSecond = () => {
           <input
             type="text"
             data-focus="username"
-            autoComplete="off"
             placeholder="Username"
             id="username"
+            value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
           <span className={`input_helper ${nameFocus}`}>
@@ -150,10 +150,10 @@ const RegisterSecond = () => {
           <label htmlFor="password">Password*</label>
           <input
             type="password"
-            autoComplete="off"
             placeholder="Create password"
             data-focus="password"
             id="password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <span className={`input_helper ${passwordFocus}`}>
@@ -164,10 +164,10 @@ const RegisterSecond = () => {
           <label htmlFor="repeat">Repeat*</label>
           <input
             type="password"
-            autoComplete="off"
             data-focus="repeat"
             placeholder="Repeat password"
             id="reapeat"
+            value={confirm}
             onChange={(e) => setConfirm(e.target.value)}
           />
           <span className={`input_helper ${repeatFocus}`}>

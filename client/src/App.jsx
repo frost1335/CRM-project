@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Login, RegisterSecond, Forgot, SendInfo } from "./components";
+import { Login, RegisterSecond, Forgot, SendInfo, Reset } from "./components";
 import { RegisterPage, LoginPage, PageNotFound } from "./pages";
 import Wrapper from "./Wrapper/Wrapper";
 
@@ -33,10 +33,18 @@ const App = () => {
         }
       />
       <Route
-        path="reset"
+        path="forgot"
         element={
           <LoginPage>
             <Forgot />
+          </LoginPage>
+        }
+      />
+      <Route
+        path="reset"
+        element={
+          <LoginPage>
+            <Reset />
           </LoginPage>
         }
       />

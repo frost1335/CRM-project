@@ -8,6 +8,7 @@ import RegisterSecond from "./AuthComponents/RegisterSecond/RegisterSecond";
 import Login from "./AuthComponents/Login/Login";
 import Forgot from "./AuthComponents/Forgot/Forgot";
 import SendInfo from "./AuthComponents/SendInfo/SendInfo";
+import Reset from "./AuthComponents/Reset/Reset";
 
 export {
   Navbar,
@@ -20,4 +21,5 @@ export {
   Login,
   Forgot,
   SendInfo,
+  Reset,
 };
