@@ -8,27 +8,40 @@ import axios from "axios";
 
 const Wrapper = (props) => {
   const navigate = useNavigate();
+  const [sidebar, setSidebar] = useState(true);
+  const [privateData, setPrivateData] = useState("");
+  const [error, setError] = useState("");
+
+  const toggleSidebar = () => setSidebar(!sidebar);
 
   useEffect(() => {
     if (!localStorage.getItem("authToken")) {
       navigate("/login");
     }
+
+    const fetchPrivateData = async () => {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+      };
+
+      try {
+        const { data } = await axios.get("/api/private", config);
+
+        console.log(data);
+
+        setPrivateData(data.data);
+      } catch (error) {
+        navigate("login");
+        localStorage.removeItem("authToken");
+        setError("You are not authorized please login");
+      }
+    };
+
+    fetchPrivateData();
   }, [navigate]);
-
-  async function tokenConfirm() {
-    try {
-      const data = await axios.get("/api/private/");
-
-      console.log(data);
-    } catch (error) {
-      console.log(error.response.data);
-    }
-  }
-
-  tokenConfirm()
-  const [sidebar, setSidebar] = useState(true);
-
-  const toggleSidebar = () => setSidebar(!sidebar);
 
   return (
     <div className="Wrapper">

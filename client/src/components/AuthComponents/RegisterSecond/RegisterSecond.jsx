@@ -82,7 +82,7 @@ const RegisterSecond = () => {
         config
       );
 
-      localStorage.setItem("authToken", { token: data.token, data: "12:00" });
+      localStorage.setItem("authToken", data.token);
 
       navigate("/");
     } catch (error) {

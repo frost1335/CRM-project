@@ -7,13 +7,15 @@ exports.register = async (req, res, next) => {
   const { username, email, password } = req.body;
 
   try {
-    const user = await User.create({
+    // const user =
+    await User.create({
       username,
       email,
       password,
     });
 
-    sendToken(user, 201, res);
+    // sendToken(user, 201, res);
+    res.status(201).json({ success: true, data: "User has been recorded" });
   } catch (error) {
     next(error);
   }
@@ -43,7 +45,7 @@ exports.login = async (req, res, next) => {
       return next(new ErrorResponse("Invalid credentials", 401));
     }
 
-    sendToken(user, 200, res,req);
+    sendToken(user, 200, res, req);
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
@@ -123,9 +125,8 @@ exports.resetPassword = async (req, res, next) => {
   }
 };
 
-const sendToken = (user, statusCode, res,req) => {
+const sendToken = (user, statusCode, res, req) => {
   const token = user.getSignedToken();
-  req.header("authentication", token);
   console.log(token);
   res.status(statusCode).json({ success: true, token });
 };
