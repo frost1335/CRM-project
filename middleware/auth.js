@@ -5,13 +5,17 @@ const ErrorResponse = require("../utils/errorResponse");
 exports.protect = async (req, res, next) => {
   let token;
 
+
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
   ) {
     // Bearer sa3923ri9834ru435834r9438r
+    req.headers
     token = req.headers.authorization.split(" ")[1];
   }
+
+  console.log(req.headers);
 
   if (!token) {
     return next(new ErrorResponse("Not authorized to acces this route", 401));

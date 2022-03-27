@@ -4,6 +4,7 @@ import "./Wrapper.scss";
 import { Navbar, Sidebar } from "../components";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Wrapper = (props) => {
   const navigate = useNavigate();
@@ -14,6 +15,17 @@ const Wrapper = (props) => {
     }
   }, [navigate]);
 
+  async function tokenConfirm() {
+    try {
+      const data = await axios.get("/api/private/");
+
+      console.log(data);
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  }
+
+  tokenConfirm()
   const [sidebar, setSidebar] = useState(true);
 
   const toggleSidebar = () => setSidebar(!sidebar);
