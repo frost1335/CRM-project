@@ -2,9 +2,6 @@ const crypto = require("crypto");
 const User = require("../models/User");
 const ErrorResponse = require("../utils/errorResponse");
 const sendEmail = require("../utils/sendEmail");
-const http = require("http");
-
-const agent = new http.Agent({ keepAlive: true });
 
 exports.register = async (req, res, next) => {
   const { username, email, password } = req.body;
@@ -23,24 +20,8 @@ exports.register = async (req, res, next) => {
 };
 
 exports.login = async (req, res, next) => {
-  function retriableRequest() {
-    return http
-      .get("http://localhost:3333", { agent }, (res) => {
-        // ...
-      })
-      .on("error", (err) => {
-        // Check if retry is needed
-        if (req.reusedSocket && err.code === "ECONNRESET") {
-          retriableRequest();
-        }
-      });
-  }
-
-  retriableRequest();
-  
-  retriableRequest().setHeader("asd", "asd");
   const { email, password } = req.body;
-  
+
   if (!email || !password) {
     return next(
       new ErrorResponse("Please provide an email and a password", 400)
@@ -62,7 +43,7 @@ exports.login = async (req, res, next) => {
       return next(new ErrorResponse("Invalid credentials", 401));
     }
 
-    sendToken(user, 200, res);
+    sendToken(user, 200, res,req);
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
@@ -142,8 +123,9 @@ exports.resetPassword = async (req, res, next) => {
   }
 };
 
-const sendToken = (user, statusCode, res) => {
+const sendToken = (user, statusCode, res,req) => {
   const token = user.getSignedToken();
+  req.header("authentication", token);
   console.log(token);
   res.status(statusCode).json({ success: true, token });
 };
