@@ -5,7 +5,10 @@ import { FiChevronRight } from "react-icons/fi";
 import Switch from "../Switch/Switch";
 import { useNavigate } from "react-router-dom";
 
-const Profile = () => {
+const Profile = (props) => {
+
+  console.log(props.suitor.data);
+
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
   const [overlay, setOverlay] = useState(false);
@@ -94,7 +97,14 @@ const Profile = () => {
                     </li>
                   </ul>
                 </div>
-                <div className="content_body"></div>
+                <div className="content_body">
+                  {props.suitor.data.map((suit) => (
+                    <div>
+                      <h3>{suit.username}</h3>
+                      <p>{suit.email}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           ) : null}
