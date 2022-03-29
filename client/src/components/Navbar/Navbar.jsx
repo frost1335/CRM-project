@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "./Navbar.scss";
 import Search from "../Search/Search";
 import Profile from "../Profile/Profile";
+import AdminProfile from "../AdminProfile/AdminProfile";
 import Notification from "../Notification/Notification";
-import axios from 'axios'
+import axios from "axios";
 
 const Navbar = () => {
   const [suitor, setSuitor] = useState([]);
@@ -17,7 +18,7 @@ const Navbar = () => {
     }
   };
 
-  fetchData()
+  fetchData();
 
   return (
     <div className="Navbar">
@@ -26,7 +27,7 @@ const Navbar = () => {
       </div>
       <div className="navbar_left">
         <Notification />
-        <Profile suitor={suitor} />
+        <AdminProfile suitor={suitor} />
       </div>
     </div>
   );

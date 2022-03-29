@@ -77,14 +77,12 @@ const RegisterSecond = () => {
 
     try {
       const { data } = await axios.post(
-        "api/auth/register",
+        "api/suitor/register",
         { username, email, password },
         config
       );
 
-      localStorage.setItem("authToken", data.token);
-
-      navigate("/");
+      navigate("/wait");
     } catch (error) {
       console.log(error);
       setError(error.response.data.error);

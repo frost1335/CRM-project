@@ -1,12 +1,25 @@
 const Suitor = require("../models/Suitor");
-const ErrorResponse = require("../utils/errorResponse");
-const sendEmail = require("../utils/sendEmail");
+const User = require("../models/User");
+const { isOwner } = require("../utils/isOwner");
 
 exports.register = async (req, res, next) => {
   const { username, email, password } = req.body;
-console.log(password); 
+  const owner = await isOwner(next);
   try {
-    const user = await Suitor.create({
+    if (owner) {
+      await User.create({
+        username,
+        email,
+        password,
+        status: "admin",
+      });
+
+      return res
+        .status(201)
+        .json({ success: true, data: "User has been recorded" });
+    }
+
+    await Suitor.create({
       username,
       email,
       password,
@@ -22,11 +35,11 @@ exports.getAll = async (req, res, next) => {
   try {
     const suitors = await Suitor.find();
 
-    if (!suitors) {
-      res.status(200).json({ success: true, message: "Not found any suitor" });
+    if (suitors) {
+      res.status(200).json({ success: 200, data: suitors });
     }
 
-    res.status(200).json({ success: 200, data: suitors });
+    next();
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
