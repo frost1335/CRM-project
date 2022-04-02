@@ -4,9 +4,11 @@ import { profileLogo } from "../../images";
 import { FiChevronRight, FiPlus } from "react-icons/fi";
 import Switch from "../Switch/Switch";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const AdminProfile = (props) => {
   const navigate = useNavigate();
+  const [suitor, setSuitor] = useState();
   const [modal, setModal] = useState(false);
   const [overlay, setOverlay] = useState(false);
   const [contentBody, setContentBody] = useState({
@@ -14,6 +16,18 @@ const AdminProfile = (props) => {
     presmission: "",
     suitor: "",
   });
+
+  const fetchData = async () => {
+    try {
+      const { data } = await axios.get("/api/suitor");
+
+      setSuitor(data.data);
+    } catch (error) {
+      console.log(error.response.data.error);
+    }
+  };
+
+  fetchData();
 
   const closeToggle = () => {
     setModal(false);
@@ -50,6 +64,34 @@ const AdminProfile = (props) => {
         });
         break;
     }
+  };
+
+  const suitorAgreeHandler = async (id, status) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const { data } = await axios.post(
+        `/api/suitor/agree/${id}`,
+        { status },
+        config
+      );
+
+      // if (data.success) {
+      //   const filterSuitor = suitor.filter((s) => s._id !== id);
+
+      //   setSuitor(filterSuitor);
+      // }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const suitorDisagreeHandler = (id) => {
+    console.log(id);
   };
 
   return (
@@ -157,7 +199,7 @@ const AdminProfile = (props) => {
                       <span>Decide suitors</span>
                     </div>
                     <div className="suitor_list">
-                      {props.suitor.data.map((suit, index) => (
+                      {suitor.map((suit, index) => (
                         <div className="suitor_item" key={index}>
                           <div className="item_info">
                             <div className="info_logo">MK</div>
@@ -168,16 +210,30 @@ const AdminProfile = (props) => {
                           </div>
                           <div className="item_decide">
                             <div className="decide">
-                              <button className="disagree">Disagree</button>
+                              <button
+                                className="disagree"
+                                onClick={() => suitorDisagreeHandler(suit._id)}
+                              >
+                                Disagree
+                              </button>
                             </div>
                             <div className="decide agree">
                               <button className="agree">
                                 Agree
                                 <div className="agree_info">
                                   <ul>
-                                    <li>Admin</li>
-                                    <li>Member</li>
-                                    <li>Student</li>
+                                    {["Admin", "Member", "Student"].map(
+                                      (status, index) => (
+                                        <li
+                                          key={index}
+                                          onClick={() =>
+                                            suitorAgreeHandler(suit._id, status)
+                                          }
+                                        >
+                                          {status}
+                                        </li>
+                                      )
+                                    )}
                                   </ul>
                                 </div>
                               </button>

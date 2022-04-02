@@ -44,3 +44,23 @@ exports.getAll = async (req, res, next) => {
     res.status(500).json({ success: false, error: error.message });
   }
 };
+
+exports.agreeById = async (req, res, next) => {
+  const { status } = req.body;
+  console.log(status);
+  try {
+    const { username, email, password } = await Suitor.findById(req.params.id);
+
+    await User.create({
+      username,
+      email,
+      password,
+      status
+    });
+
+
+    res.status(201).json({ success: true, data: "User has been recorded" });
+  } catch (error) {
+    next(error);
+  }
+};
