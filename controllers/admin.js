@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const Suitor = require("../models/Suitor");
+const mongoose = require('mongoose')
 
 exports.getAllUsers = async (req, res, next) => {
   try {
@@ -16,16 +17,16 @@ exports.getAllUsers = async (req, res, next) => {
 };
 
 exports.editUser = async (req, res, next) => {
+  const { id, status } = req.body
   try {
-    await User.findByIdAndUpdate(req.params.id, {
-      email: req.body.email,
-      username: req.body.username,
-      status: req.body.status,
-    });
+
+    await User.findByIdAndUpdate(id, { status });
 
     const users = await User.find();
 
-    res.status(200).json({ success: true, data: users });
+    const filteredUsers = users.filter((user) => user._id.toString() !== req.params.id.toString())
+
+    res.status(200).json({ success: true, data: filteredUsers });
   } catch (error) {
     next(error);
   }

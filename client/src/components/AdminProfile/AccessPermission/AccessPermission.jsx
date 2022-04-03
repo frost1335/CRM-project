@@ -44,31 +44,25 @@ const AccessPermission = (props) => {
   }, []);
 
   const editPermessionHandler = async (user, status) => {
-    // document.getElementById(`permission-${user._id}`).style.display = "none";
-
+    document.getElementById(`permission-${user._id}`).classList.remove('open')
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
-
-    let userEdited = user;
-
-    userEdited.status = status;
-
     try {
       const { data } = await axios.put(
-        `/api/admin/permission/${user._id}`,
-        userEdited,
+        `/api/admin/permission/${localStorage.getItem("userId")}`,
+        { status, id: user._id },
         config
       );
-
-      console.log(data);
       setUsers(data.data);
     } catch (error) {
       console.log(error.message);
     }
   };
+
+  const onHandleList = (id) => document.getElementById(`permission-${id}`).classList.add('open')
 
   return (
     <div className={`Access_permission ${props.className}`}>
@@ -88,25 +82,25 @@ const AccessPermission = (props) => {
             </div>
             <div className="item_permission">
               <button className="delete_user">delete</button>
-              <button>
-                {user.status}{" "}
+              <button onFocus={() => onHandleList(user._id)}>
+                {user.status}
                 <span>
                   <AiFillCaretDown />
                 </span>
-                <div className="permission_list" id={"permission-" + user._id}>
-                  <ul>
-                    {permission.map((per) => (
-                      <li
-                        key={index + "permission"}
-                        onClick={() => editPermessionHandler(user, per.status)}
-                      >
-                        <h5>{per.status}</h5>
-                        <p>{per.description}</p>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
               </button>
+              <div className="permission_list" id={"permission-" + user._id} >
+                <ul>
+                  {permission.map((per, i) => (
+                    <li
+                      key={i + "-permission"}
+                      onClick={() => editPermessionHandler(user, per.status)}
+                    >
+                      <h5>{per.status}</h5>
+                      <p>{per.description}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         ))}
