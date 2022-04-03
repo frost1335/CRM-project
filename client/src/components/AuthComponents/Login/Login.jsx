@@ -40,10 +40,11 @@ const Login = () => {
       );
 
       localStorage.setItem("authToken", data.token);
+      localStorage.setItem("userId", data.userId);
 
       navigate("/");
     } catch (error) {
-      setError(e.response.data.error);
+      setError(error.response.data.error);
       setTimeout(() => {
         setError("");
       }, 5000);
@@ -68,10 +69,16 @@ const Login = () => {
     else if (e.target.type === "password") setPasswordFocus("");
   });
 
+  console.log(error);
+
   return (
     <div className="Auth_component">
       <h3>Welcome back!</h3>
-      <h6>Please, enter your e-mail or phone number to login</h6>
+      {error ? (
+        <h6 className="error">{error}</h6>
+      ) : (
+        <h6>Please, enter your e-mail or phone number to login</h6>
+      )}
 
       <form onSubmit={loginHandler}>
         <div className="input_form">

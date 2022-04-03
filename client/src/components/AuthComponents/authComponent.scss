@@ -28,6 +28,10 @@
     margin-bottom: 65px;
   }
 
+  h6.error {
+    color: #d44333;
+  }
+
   form {
     display: flex;
     flex-grow: 1;
@@ -148,14 +152,14 @@
 .component2 {
   padding: 40px 64px;
 
-  h3 {
-    margin-bottom: 30px;
+  h6 {
+    margin-bottom: 15px;
   }
 
   .input_form {
     input {
       margin-bottom: 5px !important;
-      padding: 13px 20px;
+      padding: 12px 20px !important;
     }
     span {
       margin-bottom: 5px !important;

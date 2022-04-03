@@ -13,6 +13,7 @@ app.use(express.json());
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/private", require("./routes/private"));
 app.use("/api/suitor", require("./routes/suitor"));
+app.use("/api/admin", require("./routes/admin"));
 
 // Error Handler (Should be last piece of middleware)
 app.use(errorHandler);

@@ -11,7 +11,7 @@ exports.register = async (req, res, next) => {
         username,
         email,
         password,
-        status: "admin",
+        status: "owner",
       });
 
       return res
@@ -47,7 +47,6 @@ exports.getAll = async (req, res, next) => {
 
 exports.agreeById = async (req, res, next) => {
   const { status } = req.body;
-  console.log(status);
   try {
     const { username, email, password } = await Suitor.findById(req.params.id);
 
@@ -55,11 +54,23 @@ exports.agreeById = async (req, res, next) => {
       username,
       email,
       password,
-      status
+      status,
     });
 
+    await Suitor.findByIdAndRemove(req.params.id);
 
-    res.status(201).json({ success: true, data: "User has been recorded" });
+    res.status(201).json({ success: true, data: "Suitor has been recorded" });
+  } catch (error) {
+    await Suitor.findByIdAndRemove(req.params.id);
+    next(error);
+  }
+};
+
+exports.disagreeById = async (req, res, next) => {
+  try {
+    await Suitor.findByIdAndRemove(req.params.id);
+
+    res.status(201).json({ success: true, data: "Suitor has been deleted" });
   } catch (error) {
     next(error);
   }

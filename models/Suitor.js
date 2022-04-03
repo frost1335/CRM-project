@@ -14,20 +14,20 @@ const SuitorSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, "Please add a password"],
-    minlength: 6,
+    minlength: [6, "Password must be more than 6 characters"],
     // select: false,
   },
 });
 
-SuitorSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
-    next();
-  }
+// SuitorSchema.pre("save", async function (next) {
+//   if (!this.isModified("password")) {
+//     next();
+//   }
 
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-  next();
-});
+//   const salt = await bcrypt.genSalt(10);
+//   this.password = await bcrypt.hash(this.password, salt);
+//   next();
+// });
 
 const Suitor = mongoose.model("Suitor", SuitorSchema);
 

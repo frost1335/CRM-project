@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, "Please add a password"],
-    minlength: 6,
+    minlength: [6, "Password must be more than 6 characters"],
     select: false,
   },
   resetPasswordToken: String,
@@ -43,7 +43,7 @@ UserSchema.methods.matchPasswords = async function (password) {
 
 UserSchema.methods.getSignedToken = function () {
   const token = jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRE * 10,
+    expiresIn: process.env.JWT_EXPIRE * 30,
   });
 
   return token;

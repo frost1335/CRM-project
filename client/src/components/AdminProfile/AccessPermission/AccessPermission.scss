@@ -1,0 +1,183 @@
+.Access_permission {
+  padding-top: 32px;
+
+  .access_head {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 18px;
+
+    p {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 24px;
+      text-transform: uppercase;
+      color: #030235;
+    }
+
+    span {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 24px;
+      color: #030235;
+    }
+  }
+
+  .user_list {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+
+    .user_item {
+      display: flex;
+      flex-grow: 1;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 16px 12px;
+      border-top: 1px solid rgba(89, 100, 118, 0.16);
+
+      &:last-child {
+        border-bottom: 1px solid rgba(89, 100, 118, 0.16);
+      }
+
+      .item_info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .info_logo {
+          background: #030235;
+          border-radius: 50%;
+          width: 32px;
+          height: 32px;
+          display: flex;
+          flex-grow: 1;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+          margin-right: 10px;
+        }
+
+        .info_text {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+
+          p {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 24px;
+            color: #030235;
+          }
+
+          span {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 18px;
+            letter-spacing: -0.078px;
+            color: #6b6e85;
+          }
+        }
+      }
+
+      .item_permission {
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        align-items: center;
+
+        .delete_user {
+          margin-right: 15px;
+
+          &:hover {
+            background-color: rgb(242, 74, 114, 0.3);
+          }
+        }
+
+        .permission_list {
+          width: 350px;
+          top: -150%;
+          right: 0;
+          position: absolute;
+          z-index: 3;
+          display: none;
+          transition: all 0.2s;
+          background: #ffffff;
+          padding: 10px 13px;
+          box-shadow: 0px 16px 24px rgba(2, 3, 3, 0.03),
+            0px 6px 30px rgba(2, 3, 3, 0.02), 0px 8px 10px rgba(2, 3, 3, 0.04);
+          border-radius: 12px;
+
+          ul {
+            list-style: none;
+            text-align: start;
+            display: flex;
+            flex-direction: column;
+
+            li {
+              padding: 7px 14px;
+              border-radius: 8px;
+
+              h5 {
+                font-weight: 600;
+                font-size: 15px;
+                line-height: 24px;
+                color: #030235;
+              }
+
+              p {
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 20px;
+                color: #6b6e85;
+              }
+
+              &:hover {
+                background: #f7f7f9;
+              }
+            }
+          }
+        }
+
+        button {
+          border: none;
+          outline: none;
+          display: flex;
+          align-items: center;
+          background: #f7f7f9;
+          color: #98a0ad;
+          padding: 8px 13px;
+          transition: all 0.1s;
+          border-radius: 6px;
+          font-weight: 500;
+          font-size: 15px;
+          line-height: 16px;
+          cursor: pointer;
+
+          &:focus {
+            .permission_list {
+              display: block;
+            }
+          }
+
+          span {
+            color: #030235;
+            font-size: 13px;
+            margin-left: 5px;
+            margin-bottom: 1px;
+
+            display: flex;
+            align-items: flex-end;
+          }
+        }
+      }
+    }
+  }
+}

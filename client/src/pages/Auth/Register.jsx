@@ -7,8 +7,6 @@ import { useLocation } from "react-router-dom";
 const Register = (props) => {
   const { pathname } = useLocation();
 
-  console.log(pathname.replace("/", ""));
-
   const registerContent = () => {
     switch (pathname.replace("/", "")) {
       case "register":

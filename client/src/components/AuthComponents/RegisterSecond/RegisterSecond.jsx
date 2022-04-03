@@ -114,7 +114,11 @@ const RegisterSecond = () => {
   return (
     <div className="Auth_component component2">
       <h3>Registration</h3>
-
+      {error ? (
+        <h6 className="error">{error}</h6>
+      ) : (
+        <h6>Lets get started with a few simple steps!</h6>
+      )}
       <form onSubmit={registerHandler}>
         <div className="input_form">
           <label htmlFor="email">Your E-mail*</label>

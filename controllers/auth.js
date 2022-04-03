@@ -7,14 +7,12 @@ exports.register = async (req, res, next) => {
   const { username, email, password } = req.body;
 
   try {
-    // const user =
     await User.create({
       username,
       email,
       password,
     });
 
-    // sendToken(user, 201, res);
     res.status(201).json({ success: true, data: "User has been recorded" });
   } catch (error) {
     next(error);
@@ -127,6 +125,5 @@ exports.resetPassword = async (req, res, next) => {
 
 const sendToken = (user, statusCode, res, req) => {
   const token = user.getSignedToken();
-  console.log(token);
-  res.status(statusCode).json({ success: true, token });
+  res.status(statusCode).json({ success: true, token, userId: user._id });
 };

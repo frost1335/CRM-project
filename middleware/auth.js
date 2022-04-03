@@ -14,8 +14,6 @@ exports.protect = async (req, res, next) => {
     token = req.headers.authorization.split(" ")[1];
   }
 
-  console.log(token);
-
   if (!token) {
     return next(new ErrorResponse("Not authorized to acces this route", 401));
   }

@@ -30,8 +30,6 @@ const Wrapper = (props) => {
       try {
         const { data } = await axios.get("/api/private", config);
 
-        console.log(data);
-
         setPrivateData(data.data);
       } catch (error) {
         navigate("login");
