@@ -23,7 +23,6 @@ const RegisterSecond = () => {
     }
   }, [navigate]);
 
-
   const registerHandler = async (e) => {
     e.preventDefault();
 
@@ -44,7 +43,7 @@ const RegisterSecond = () => {
 
     try {
       const { data } = await axios.post(
-        "api/suitor/register",
+        "/api/suitor/register",
         { username, email, password },
         config
       );

@@ -1,11 +1,11 @@
-import * as api from "../api ";
+
 
 // Action Creators
 export const registerHandler = () => async (dispatch) => {
   try {
-    const { data } = await api.registerHandler();
+    // const { data } = await 
 
-    dispatch({ type: "REGISTER_HANDLER", payload: data });
+    // dispatch({ type: "REGISTER_HANDLER", payload: data });
   } catch (error) {
     console.log(error.message);
   }
