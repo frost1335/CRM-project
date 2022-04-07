@@ -1,6 +1,14 @@
 const User = require("../models/User");
-const Suitor = require("../models/Suitor");
-const mongoose = require('mongoose')
+
+const filteredUsers = async (id) => {
+  const users = await User.find();
+
+  const filterUsers = users.filter(
+    (user) => user._id.toString() !== id.toString()
+  );
+
+  return filterUsers;
+};
 
 exports.getAllUsers = async (req, res, next) => {
   try {
@@ -17,16 +25,22 @@ exports.getAllUsers = async (req, res, next) => {
 };
 
 exports.editUser = async (req, res, next) => {
-  const { id, status } = req.body
+  const { id, status } = req.body;
   try {
-
     await User.findByIdAndUpdate(id, { status });
 
-    const users = await User.find();
+    res.status(200).json({ success: true, data: filteredUsers(req.params.id) });
+  } catch (error) {
+    next(error);
+  }
+};
 
-    const filteredUsers = users.filter((user) => user._id.toString() !== req.params.id.toString())
+exports.deleteUser = async (req, res, next) => {
+  const { id } = req.body;
+  try {
+    await User.findByIdAndRemove(id);
 
-    res.status(200).json({ success: true, data: filteredUsers });
+    res.status(201).json({ success: true, data: filteredUsers(req.params.id) });
   } catch (error) {
     next(error);
   }

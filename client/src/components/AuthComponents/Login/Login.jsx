@@ -69,8 +69,6 @@ const Login = () => {
     else if (e.target.type === "password") setPasswordFocus("");
   });
 
-  console.log(error);
-
   return (
     <div className="Auth_component">
       <h3>Welcome back!</h3>

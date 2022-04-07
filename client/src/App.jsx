@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Login, RegisterSecond, Forgot, SendInfo, Reset } from "./components";
 import { RegisterPage, LoginPage, PageNotFound } from "./pages";
 import Wrapper from "./Wrapper/Wrapper";
 
+import { useDispatch } from "react-redux";
+import { registerHandler } from "./actions/register";
+
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch( registerHandler );
+  }, []);
+
   return (
     <Routes>
       <Route path="/" element={<Wrapper>component</Wrapper>} />

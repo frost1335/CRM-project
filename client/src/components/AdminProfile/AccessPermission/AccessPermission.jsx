@@ -22,6 +22,12 @@ const permission = [
 
 const AccessPermission = (props) => {
   const [users, setUsers] = useState([]);
+  const permissionBack = (stat, classname, id) => {
+    document.querySelectorAll(`.permission_back-${id}`).forEach((elem) => {
+      if (stat === "remove") elem.classList.remove(classname);
+      else elem.classList.add(classname);
+    });
+  };
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -44,7 +50,8 @@ const AccessPermission = (props) => {
   }, []);
 
   const editPermessionHandler = async (user, status) => {
-    document.getElementById(`permission-${user._id}`).classList.remove('open')
+    document.getElementById(`permission-${user._id}`).classList.remove("open");
+    permissionBack("remove", "open", user._id);
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -62,7 +69,35 @@ const AccessPermission = (props) => {
     }
   };
 
-  const onHandleList = (id) => document.getElementById(`permission-${id}`).classList.add('open')
+  const onHandleList = (id) => {
+    permissionBack("add", "open", id);
+    document.getElementById(`permission-${id}`).classList.add("open");
+  };
+
+  const onHandleBack = (id) => {
+    permissionBack("remove", "open", id);
+    document.getElementById(`permission-${id}`).classList.remove("open");
+  };
+
+  const onDeleteUser = async (id) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const { data } = await axios.post(
+        `/api/admin/permission/${localStorage.getItem("userId")}`,
+        { id },
+        config
+      );
+
+      setUsers(data.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <div className={`Access_permission ${props.className}`}>
@@ -81,14 +116,23 @@ const AccessPermission = (props) => {
               </div>
             </div>
             <div className="item_permission">
-              <button className="delete_user">delete</button>
-              <button onFocus={() => onHandleList(user._id)}>
+              <button
+                className="delete_user"
+                onClick={() => onDeleteUser(user._id)}
+              >
+                delete
+              </button>
+              <button onClick={() => onHandleList(user._id)}>
                 {user.status}
                 <span>
                   <AiFillCaretDown />
                 </span>
               </button>
-              <div className="permission_list" id={"permission-" + user._id} >
+              <div
+                className={`permission_back permission_back-${user._id}`}
+                onClick={() => onHandleBack(user._id)}
+              ></div>
+              <div className="permission_list" id={"permission-" + user._id}>
                 <ul>
                   {permission.map((per, i) => (
                     <li

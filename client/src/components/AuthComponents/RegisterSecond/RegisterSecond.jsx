@@ -17,45 +17,12 @@ const RegisterSecond = () => {
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState();
 
-  document.addEventListener("focusin", function (e) {
-    switch (e.target.dataset.focus) {
-      case "username":
-        setNameFocus("active");
-        setEmailFocus("");
-        setPasswordFocus("");
-        setReapetFocus("");
-        break;
-      case "email":
-        setNameFocus("");
-        setEmailFocus("active");
-        setPasswordFocus("");
-        setReapetFocus("");
-        break;
-      case "password":
-        setNameFocus("");
-        setEmailFocus("");
-        setPasswordFocus("active");
-        setReapetFocus("");
-        break;
-      case "repeat":
-        setNameFocus("");
-        setEmailFocus("");
-        setPasswordFocus("");
-        setReapetFocus("active");
-        break;
-      default:
-        setNameFocus("");
-        setEmailFocus("");
-        setPasswordFocus("");
-        setReapetFocus("");
-    }
-  });
-
   useEffect(() => {
     if (localStorage.getItem("authToken")) {
       navigate("/");
     }
   }, [navigate]);
+
 
   const registerHandler = async (e) => {
     e.preventDefault();
@@ -91,6 +58,40 @@ const RegisterSecond = () => {
       }, 5000);
     }
   };
+
+  document.addEventListener("focusin", function (e) {
+    switch (e.target.dataset.focus) {
+      case "username":
+        setNameFocus("active");
+        setEmailFocus("");
+        setPasswordFocus("");
+        setReapetFocus("");
+        break;
+      case "email":
+        setNameFocus("");
+        setEmailFocus("active");
+        setPasswordFocus("");
+        setReapetFocus("");
+        break;
+      case "password":
+        setNameFocus("");
+        setEmailFocus("");
+        setPasswordFocus("active");
+        setReapetFocus("");
+        break;
+      case "repeat":
+        setNameFocus("");
+        setEmailFocus("");
+        setPasswordFocus("");
+        setReapetFocus("active");
+        break;
+      default:
+        setNameFocus("");
+        setEmailFocus("");
+        setPasswordFocus("");
+        setReapetFocus("");
+    }
+  });
 
   document.addEventListener("focusout", function (e) {
     switch (e.target.dataset.focus) {
