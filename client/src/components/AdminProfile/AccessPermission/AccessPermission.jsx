@@ -41,6 +41,7 @@ const AccessPermission = (props) => {
           `/api/admin/permission/${localStorage.getItem("userId")}`,
           config
         );
+
         setUsers(data.data);
       } catch (error) {
         console.log(error.message);
